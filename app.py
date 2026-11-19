@@ -5,6 +5,25 @@ st.title("Page Turners")
 
 books = pd.read_csv("books.csv")
 
+required_columns = [
+    "book_id",
+    "title",
+    "authors",
+    "original_publication_year",
+    "average_rating",
+    "ratings_count",
+]
+missing_columns = [
+    column for column in required_columns if column not in books.columns
+]
+
+st.subheader("Required columns")
+if missing_columns:
+    st.error("Missing required columns: " + ", ".join(missing_columns))
+    st.stop()
+else:
+    st.success("All required columns are present.")
+
 st.subheader("Preview of the book data")
 st.dataframe(books.head())
 
@@ -16,7 +35,6 @@ st.subheader("Missing values in each column")
 st.dataframe(books.isna().sum())
 st.subheader("Column data types")
 st.dataframe(books.dtypes.astype(str))
-
 st.subheader("Duplicate book IDs")
 st.write(books["book_id"].duplicated().sum())
 st.subheader("Numerical summary")
@@ -37,7 +55,6 @@ st.dataframe(
 )
 
 st.subheader("Books with missing publication years")
-
 missing_year = books["original_publication_year"].isna()
 
 st.dataframe(books.loc[missing_year, year_columns])
