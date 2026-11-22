@@ -4,7 +4,11 @@ from page_turners.data import load_books
 
 st.title("Page Turners")
 
-books = load_books()
+try:
+    books = load_books()
+except FileNotFoundError:
+    st.error("Could not find books.csv. Make sure the dataset is in the project folder.")
+    st.stop()
 
 required_columns = [
     "book_id",
