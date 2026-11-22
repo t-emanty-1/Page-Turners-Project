@@ -1,5 +1,6 @@
 import streamlit as st
 
+from page_turners.analysis import calculate_rating_correlation
 from page_turners.data import load_books, clean_books
 
 st.title("Page Turners")
@@ -12,6 +13,10 @@ except FileNotFoundError:
 cleaned_books = clean_books(books)
 
 st.write("Books available for ratings analysis:", len(cleaned_books))
+correlation = calculate_rating_correlation(cleaned_books)
+
+st.subheader("Popularity and Average Ratings")
+st.write("Pearson correlation coefficient:", round(correlation, 4))
 required_columns = [
     "book_id",
     "title",
