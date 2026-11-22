@@ -2,8 +2,7 @@ import streamlit as st
 
 from page_turners.analysis import calculate_rating_correlation
 from page_turners.data import load_books, clean_books
-from page_turners.plots import plot_rating_distribution
-
+from page_turners.plots import plot_rating_distribution, plot_popularity_vs_rating
 st.title("Page Turners")
 
 try:
@@ -18,10 +17,16 @@ correlation = calculate_rating_correlation(cleaned_books)
 
 st.subheader("Popularity and Average Ratings")
 st.write("Pearson correlation coefficient:", round(correlation, 4))
+
 st.subheader("Distribution of Average Ratings")
 
 figure = plot_rating_distribution(cleaned_books)
 st.pyplot(figure)
+
+st.subheader("Popularity vs Average Rating")
+
+scatter_figure = plot_popularity_vs_rating(cleaned_books)
+st.pyplot(scatter_figure)
 
 required_columns = [
     "book_id",
