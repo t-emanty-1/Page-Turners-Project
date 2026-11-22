@@ -1,9 +1,10 @@
-import pandas as pd
 import streamlit as st
+
+from page_turners.data import load_books
 
 st.title("Page Turners")
 
-books = pd.read_csv("books.csv")
+books = load_books()
 
 required_columns = [
     "book_id",
