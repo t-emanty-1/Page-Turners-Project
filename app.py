@@ -1,6 +1,6 @@
 import streamlit as st
 
-from page_turners.data import load_books
+from page_turners.data import load_books, clean_books
 
 st.title("Page Turners")
 
@@ -9,7 +9,9 @@ try:
 except FileNotFoundError:
     st.error("Could not find books.csv. Make sure the dataset is in the project folder.")
     st.stop()
+cleaned_books = clean_books(books)
 
+st.write("Books available for ratings analysis:", len(cleaned_books))
 required_columns = [
     "book_id",
     "title",
