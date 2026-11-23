@@ -10,24 +10,7 @@ try:
 except FileNotFoundError:
     st.error("Could not find books.csv. Make sure the dataset is in the project folder.")
     st.stop()
-cleaned_books = clean_books(books)
-
-st.write("Books available for ratings analysis:", len(cleaned_books))
-correlation = calculate_rating_correlation(cleaned_books)
-
-st.subheader("Popularity and Average Ratings")
-st.write("Pearson correlation coefficient:", round(correlation, 4))
-
-st.subheader("Distribution of Average Ratings")
-
-figure = plot_rating_distribution(cleaned_books)
-st.pyplot(figure)
-
-st.subheader("Popularity vs Average Rating")
-
-scatter_figure = plot_popularity_vs_rating(cleaned_books)
-st.pyplot(scatter_figure)
-
+    
 required_columns = [
     "book_id",
     "title",
@@ -46,6 +29,25 @@ if missing_columns:
     st.stop()
 else:
     st.success("All required columns are present.")
+
+cleaned_books = clean_books(books)
+
+st.write("Books available for ratings analysis:", len(cleaned_books))
+correlation = calculate_rating_correlation(cleaned_books)
+
+st.subheader("Popularity and Average Ratings")
+st.write("Pearson correlation coefficient:", round(correlation, 4))
+
+st.subheader("Distribution of Average Ratings")
+
+figure = plot_rating_distribution(cleaned_books)
+st.pyplot(figure)
+st.subheader("Popularity vs Average Rating")
+
+scatter_figure = plot_popularity_vs_rating(cleaned_books)
+st.pyplot(scatter_figure)
+
+
 
 st.subheader("Preview of the book data")
 st.dataframe(books.head())
