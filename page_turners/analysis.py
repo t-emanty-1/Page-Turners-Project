@@ -24,3 +24,43 @@ def calculate_rating_correlation(books):
     correlation = np.corrcoef(rating_counts, average_ratings)[0, 1]
 
     return float(correlation)
+
+
+
+def summarize_ratings_by_decade(books):
+    """
+    Calculate the number of books and mean rating by decade.
+
+    Parameters
+    ----------
+    books : pandas.DataFrame
+        Cleaned book dataset.
+
+    Returns
+    -------
+    pandas.DataFrame
+        Summary of book counts and mean ratings by decade.
+    """
+    dated_books = books.dropna(
+        subset=["original_publication_year"]
+    ).copy()
+
+    dated_books = dated_books[
+        dated_books["original_publication_year"] > 0
+    ].copy()
+
+    dated_books["decade"] = (
+        dated_books["original_publication_year"] // 10 * 10
+    ).astype(int)
+
+    summary = (
+        dated_books.groupby("decade")
+        .agg(
+            book_count=("book_id", "size"),
+            mean_rating=("average_rating", "mean"),
+        )
+        .reset_index()
+    )
+
+    return summary
+
