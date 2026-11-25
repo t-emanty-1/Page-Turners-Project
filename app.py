@@ -1,6 +1,9 @@
 import streamlit as st
 
-from page_turners.analysis import calculate_rating_correlation
+from page_turners.analysis import (
+    calculate_rating_correlation,
+    summarize_ratings_by_decade,
+)
 from page_turners.data import load_books, clean_books
 from page_turners.plots import plot_rating_distribution, plot_popularity_vs_rating
 st.title("Page Turners")
@@ -47,7 +50,13 @@ st.subheader("Popularity vs Average Rating")
 scatter_figure = plot_popularity_vs_rating(cleaned_books)
 st.pyplot(scatter_figure)
 
+st.subheader("Average Ratings by Publication Decade")
 
+decade_summary = summarize_ratings_by_decade(cleaned_books)
+
+recent_decades = decade_summary[decade_summary["decade"] >= 1950]
+
+st.dataframe(recent_decades, hide_index=True)
 
 st.subheader("Preview of the book data")
 st.dataframe(books.head())
