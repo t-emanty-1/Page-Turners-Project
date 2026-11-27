@@ -70,12 +70,7 @@ col1, col2 = st.columns(2)
 col1.metric("Books in dataset", len(books))
 col2.metric("Books analysed", len(cleaned_books))
 
-correlation = calculate_rating_correlation(cleaned_books)
-
-st.subheader("Popularity and Average Ratings")
-st.write("Pearson correlation coefficient:", round(correlation, 4))
-
-st.subheader("Distribution of Average Ratings")
+st.header("1. Distribution of Average Ratings")
 
 figure = plot_rating_distribution(cleaned_books)
 
@@ -85,7 +80,10 @@ for ax in figure.axes:
 
 st.pyplot(figure)
 
-st.subheader("Popularity vs Average Rating")
+correlation = calculate_rating_correlation(cleaned_books)
+
+st.header("2. Popularity and Average Ratings")
+st.write("Pearson correlation coefficient:", round(correlation, 4))
 
 scatter_figure = plot_popularity_vs_rating(cleaned_books)
 
@@ -95,7 +93,7 @@ for ax in scatter_figure.axes:
 
 st.pyplot(scatter_figure)
 
-st.subheader("Average Ratings by Publication Decade")
+st.header("3. Average Ratings by Publication Decade")
 
 decade_summary = summarize_ratings_by_decade(cleaned_books)
 
