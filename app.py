@@ -80,6 +80,17 @@ for ax in figure.axes:
 
 st.pyplot(figure)
 
+st.write(
+    "Most books in the dataset have average ratings close to 4 out of 5. "
+    "Very low and very high average ratings are less common."
+)
+
+st.caption(
+    "Each bar represents the number of books within "
+    "a particular average rating interval."
+)
+
+
 correlation = calculate_rating_correlation(cleaned_books)
 
 st.header("2. Popularity and Average Ratings")
