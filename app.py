@@ -60,6 +60,9 @@ else:
 
 
 cleaned_books = clean_books(books)
+if cleaned_books.empty:
+    st.error("No valid books remain after data cleaning.")
+    st.stop()
 
 st.header("Dataset Overview")
 
