@@ -34,9 +34,7 @@ def clean_books(books):
     pandas.DataFrame
         Books with valid rating information.
     """
-    cleaned_books = books.dropna(
-        subset=["average_rating", "ratings_count"]
-    ).copy()
+    cleaned_books = books.dropna(subset=["average_rating", "ratings_count"]).copy()
 
     cleaned_books = cleaned_books[cleaned_books["ratings_count"] > 0]
 

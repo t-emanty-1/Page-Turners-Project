@@ -4,8 +4,8 @@ from page_turners.analysis import (
     calculate_rating_correlation,
     summarize_ratings_by_decade,
 )
-from page_turners.data import load_books, clean_books
-from page_turners.plots import plot_rating_distribution, plot_popularity_vs_rating
+from page_turners.data import clean_books, load_books
+from page_turners.plots import plot_popularity_vs_rating, plot_rating_distribution
 
 st.title("Page Turners")
 
@@ -34,7 +34,9 @@ dark_purple = "#A15AD3"
 try:
     books = load_books()
 except FileNotFoundError:
-    st.error("Could not find books.csv. Make sure the dataset is in the project folder.")
+    st.error(
+        "Could not find books.csv. Make sure the dataset is in the project folder."
+    )
     st.stop()
 
 required_columns = [
@@ -46,9 +48,7 @@ required_columns = [
     "ratings_count",
 ]
 
-missing_columns = [
-    column for column in required_columns if column not in books.columns
-]
+missing_columns = [column for column in required_columns if column not in books.columns]
 
 st.subheader("Required columns")
 
@@ -132,13 +132,9 @@ st.dataframe(
     recent_decades,
     hide_index=True,
     column_config={
-        "decade": st.column_config.NumberColumn(
-            "Decade", format="%d"
-        ),
+        "decade": st.column_config.NumberColumn("Decade", format="%d"),
         "book_count": "Books",
-        "mean_rating": st.column_config.NumberColumn(
-            "Mean rating", format="%.3f"
-        ),
+        "mean_rating": st.column_config.NumberColumn("Mean rating", format="%.3f"),
     },
 )
 
@@ -219,9 +215,7 @@ with st.expander("Dataset Inspection and Data Quality"):
 
     year_columns = ["title", "authors", "original_publication_year"]
 
-    st.dataframe(
-        books.sort_values("original_publication_year")[year_columns].head(10)
-    )
+    st.dataframe(books.sort_values("original_publication_year")[year_columns].head(10))
 
     st.subheader("Books with missing publication years")
     missing_year = books["original_publication_year"].isna()

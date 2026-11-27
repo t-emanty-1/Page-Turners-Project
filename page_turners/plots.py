@@ -46,12 +46,7 @@ def plot_popularity_vs_rating(books):
     """
     fig, ax = plt.subplots()
 
-    ax.scatter(
-        books["ratings_count"],
-        books["average_rating"],
-        s=8,
-        alpha=0.3
-    )
+    ax.scatter(books["ratings_count"], books["average_rating"], s=8, alpha=0.3)
 
     ax.set_xscale("log")
 

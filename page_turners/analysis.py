@@ -1,4 +1,3 @@
-
 """Statistical calculations for book ratings."""
 
 import numpy as np
@@ -26,7 +25,6 @@ def calculate_rating_correlation(books):
     return float(correlation)
 
 
-
 def summarize_ratings_by_decade(books):
     """
     Calculate the number of books and mean rating by decade.
@@ -41,13 +39,9 @@ def summarize_ratings_by_decade(books):
     pandas.DataFrame
         Summary of book counts and mean ratings by decade.
     """
-    dated_books = books.dropna(
-        subset=["original_publication_year"]
-    ).copy()
+    dated_books = books.dropna(subset=["original_publication_year"]).copy()
 
-    dated_books = dated_books[
-        dated_books["original_publication_year"] > 0
-    ].copy()
+    dated_books = dated_books[dated_books["original_publication_year"] > 0].copy()
 
     dated_books["decade"] = (
         dated_books["original_publication_year"] // 10 * 10
@@ -63,4 +57,3 @@ def summarize_ratings_by_decade(books):
     )
 
     return summary
-
