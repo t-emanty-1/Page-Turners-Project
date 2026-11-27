@@ -1,50 +1,73 @@
 # Page Turners
 
-## Project Description
+Python project for the Coding for Data Science and Data Management course (2026–2027).
 
-Page Turners is a Python project developed for the Coding for Data Science and Data Management course (2026–2027).
+## Project description
 
-The project explores the relationship between book popularity and reader appreciation using the goodbooks-10k dataset. The main objective is to investigate whether books with more ratings tend to receive higher average ratings.
+Page Turners explores the relationship between book popularity and reader appreciation using the goodbooks-10k dataset. Popularity is measured by the number of ratings a book has received, while reader appreciation is measured by its average rating.
 
-The project uses data cleaning, descriptive statistics and data visualisation to explore patterns in book ratings and popularity. The analysis is presented through an interactive Streamlit application.
+## Research questions
 
-## Research Questions
-
-- Do books with more ratings tend to have higher average ratings?
-- How are average book ratings distributed?
-- How does reader appreciation vary according to publication year?
+1. How are average book ratings distributed?
+2. Do books with more ratings tend to receive higher average ratings?
+3. How do mean book ratings vary across publication decades?
 
 ## Dataset
 
-The project uses the goodbooks-10k dataset, which contains information about 10,000 books.
+The project uses `books.csv` from [goodbooks-10k](https://github.com/zygmuntz/goodbooks-10k), included in this repository. It contains 10,000 books and 23 columns.
 
-The main variables considered in the analysis are:
+The main analytical variables are `average_rating`, `ratings_count` and `original_publication_year`. Book IDs, titles and authors are also used for data inspection and counting books.
 
-- Book title
-- Author
-- Original publication year
-- Average rating
-- Number of ratings
+## Methodology
 
-Dataset source: https://github.com/zygmuntz/goodbooks-10k
+- Load the CSV with pandas and check that the required columns are present.
+- Inspect dataset dimensions, data types, missing values, duplicate book IDs and descriptive statistics.
+- Exclude books with missing rating information or nonpositive rating counts. All 10,000 books remain after these filters.
+- Plot a histogram of average ratings and a scatter plot of rating counts against average ratings. The scatter plot uses a logarithmic horizontal axis.
+- Calculate Pearson correlation with NumPy using the original, untransformed rating counts.
+- For the decade analysis, exclude missing and nonpositive publication years, group books by decade and calculate book counts and mean ratings. Display decades from 1950 onwards because earlier decades generally contain fewer books.
 
-## Tools and Libraries
+## Main findings
 
-- Python 3.14.7
-- pandas
-- Streamlit
+- Average book ratings are concentrated around 4 out of 5.
+- The Pearson correlation coefficient is approximately 0.045, indicating a very weak positive linear association between popularity and average rating.
+- Mean ratings are similar across the displayed decades. The 1960s have the highest mean (4.065), and the 2000s have the lowest (3.977).
 
-## Project Structure
+## Limitations
 
-- `app.py`: Streamlit application and data exploration.
-- `books.csv`: Original book dataset.
-- `requirements.txt`: Required Python libraries and their versions.
-- `.gitignore`: Files and directories excluded from Git.
-- `README.md`: Project description and instructions.
+The dataset is not representative of all published books. Rating count is only one measure of popularity. The decade groups differ in size, and each book receives equal weight when computing the decade mean. The analysis is descriptive: it does not establish statistical significance or causation.
 
-## Installation and Setup
+## Tools and libraries
 
-Python 3.14.7 was used to develop and test this project.
+- Python 3.14.7 — development environment
+- pandas — data loading, cleaning and aggregation
+- NumPy — numerical calculations
+- Matplotlib — visualisations
+- Streamlit — presentation of the results
+
+Library versions are specified in `requirements.txt`. Ruff was used to check and format the Python code.
+
+## Project structure
+
+```text
+Page-Turners-Project/
+├── app.py
+├── books.csv
+├── requirements.txt
+├── README.md
+├── .gitignore
+└── page_turners/
+    ├── __init__.py
+    ├── data.py
+    ├── analysis.py
+    └── plots.py
+```
+
+`data.py` loads and cleans the dataset, `analysis.py` performs statistical calculations, and `plots.py` creates the figures. `app.py` imports these functions and presents the results in Streamlit.
+
+## Installation and setup
+
+Use Python 3.14.7, the version used during development.
 
 ### 1. Clone the repository
 
@@ -59,36 +82,33 @@ cd Page-Turners-Project
 python -m venv .venv
 ```
 
-### 3. Activate the virtual environment
+### 3. Activate the environment
 
-On Windows (PowerShell):
+Windows (PowerShell):
 
 ```powershell
 .\.venv\Scripts\Activate.ps1
 ```
 
-On macOS or Linux:
+macOS or Linux:
 
 ```bash
 source .venv/bin/activate
 ```
 
-### 4. Install the required libraries
+### 4. Install dependencies
 
 ```bash
 python -m pip install -r requirements.txt
 ```
 
-## Running the Application
+## Running the application
 
-To launch the Streamlit application, run:
+From the project directory, run:
 
 ```bash
 python -m streamlit run app.py
 ```
 
-The application will open automatically in the browser.
+The application opens in the browser. If it does not open automatically, visit http://localhost:8501. Press `Ctrl+C` in the terminal to stop it.
 
-## Project Status
-
-The project is currently under development.
