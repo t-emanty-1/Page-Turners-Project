@@ -9,6 +9,26 @@ from page_turners.plots import plot_rating_distribution, plot_popularity_vs_rati
 
 st.title("Page Turners")
 
+st.write("Exploring book popularity and reader appreciation.")
+
+st.header("About the Project")
+
+st.write(
+    "This project explores the goodbooks-10k dataset "
+    "to investigate book ratings, popularity and publication years."
+)
+
+st.markdown(
+    "**Main research question:** Do books with more ratings "
+    "tend to have higher average scores?"
+)
+
+st.write(
+    "The analysis also examines the distribution of average "
+    "ratings and compares ratings across publication decades."
+)
+
+
 dark_purple = "#A15AD3"
 
 try:
@@ -38,9 +58,18 @@ if missing_columns:
 else:
     st.success("All required columns are present.")
 
+
 cleaned_books = clean_books(books)
 
-st.write("Books available for ratings analysis:", len(cleaned_books))
+st.header("Dataset Overview")
+
+st.write("Source: goodbooks-10k")
+
+col1, col2 = st.columns(2)
+
+col1.metric("Books in dataset", len(books))
+col2.metric("Books analysed", len(cleaned_books))
+
 correlation = calculate_rating_correlation(cleaned_books)
 
 st.subheader("Popularity and Average Ratings")
