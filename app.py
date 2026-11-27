@@ -160,6 +160,34 @@ st.caption(
     "Each book contributes equally to the mean rating."
 )
 
+st.header("Conclusion")
+
+st.write(
+    "The analysis shows that most books in the dataset have "
+    "average ratings close to 4 out of 5."
+)
+
+st.write(
+    "Book popularity, measured by the number of ratings, "
+    "has a very weak positive linear relationship with average rating."
+)
+
+st.write(
+    "The comparison across publication decades also reveals "
+    "relatively small differences in mean book ratings."
+)
+
+st.subheader("Limitations")
+
+st.write(
+    "- The dataset does not represent all published books.\n"
+    "- The number of ratings is only one measure of popularity.\n"
+    "- Correlation does not imply causation.\n"
+    "- The number of books varies considerably between decades.\n"
+    "- The analysis is descriptive and does not establish "
+    "statistical significance."
+)
+
 with st.expander("Dataset Inspection and Data Quality"):
     st.subheader("Preview of the book data")
     st.dataframe(books.head())
