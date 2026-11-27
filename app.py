@@ -99,7 +99,21 @@ decade_summary = summarize_ratings_by_decade(cleaned_books)
 
 recent_decades = decade_summary[decade_summary["decade"] >= 1950]
 
-st.dataframe(recent_decades, hide_index=True)
+
+st.dataframe(
+    recent_decades,
+    hide_index=True,
+    column_config={
+        "decade": st.column_config.NumberColumn(
+            "Decade", format="%d"
+        ),
+        "book_count": "Books",
+        "mean_rating": st.column_config.NumberColumn(
+            "Mean rating", format="%.3f"
+        ),
+    },
+)
+
 
 with st.expander("Dataset Inspection and Data Quality"):
     st.subheader("Preview of the book data")
