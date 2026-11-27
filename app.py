@@ -143,6 +143,23 @@ st.dataframe(
 )
 
 
+st.write(
+    "Mean book ratings remain relatively similar across publication "
+    "decades, with values close to 4 out of 5."
+)
+
+st.write(
+    "Books published in the 1960s have the highest mean rating "
+    "among the displayed decades, while those published in the "
+    "2000s have the lowest. However, the differences are small."
+)
+
+st.caption(
+    "The comparison focuses on decades from 1950 onwards "
+    "because earlier decades generally contain fewer books. "
+    "Each book contributes equally to the mean rating."
+)
+
 with st.expander("Dataset Inspection and Data Quality"):
     st.subheader("Preview of the book data")
     st.dataframe(books.head())
