@@ -104,6 +104,23 @@ for ax in scatter_figure.axes:
 
 st.pyplot(scatter_figure)
 
+st.write(
+    "The scatter plot shows no clear linear relationship between "
+    "the number of ratings and the average book rating."
+)
+
+st.write(
+    f"The Pearson correlation coefficient of {correlation:.3f} "
+    "indicates a very weak positive linear relationship. "
+    "More ratings do not necessarily correspond to higher average scores."
+)
+
+st.caption(
+    "Each point represents one book. The horizontal axis uses "
+    "a logarithmic scale because the number of ratings varies considerably."
+)
+
+
 st.header("3. Average Ratings by Publication Decade")
 
 decade_summary = summarize_ratings_by_decade(cleaned_books)
