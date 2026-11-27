@@ -101,41 +101,42 @@ recent_decades = decade_summary[decade_summary["decade"] >= 1950]
 
 st.dataframe(recent_decades, hide_index=True)
 
-st.subheader("Preview of the book data")
-st.dataframe(books.head())
+with st.expander("Dataset Inspection and Data Quality"):
+    st.subheader("Preview of the book data")
+    st.dataframe(books.head())
 
-st.subheader("Dataset size")
-st.write("Number of rows:", books.shape[0])
-st.write("Number of columns:", books.shape[1])
+    st.subheader("Dataset size")
+    st.write("Number of rows:", books.shape[0])
+    st.write("Number of columns:", books.shape[1])
 
-st.subheader("Missing values in each column")
-st.dataframe(books.isna().sum())
+    st.subheader("Missing values in each column")
+    st.dataframe(books.isna().sum())
 
-st.subheader("Column data types")
-st.dataframe(books.dtypes.astype(str))
+    st.subheader("Column data types")
+    st.dataframe(books.dtypes.astype(str))
 
-st.subheader("Duplicate book IDs")
-st.write(books["book_id"].duplicated().sum())
+    st.subheader("Duplicate book IDs")
+    st.write(books["book_id"].duplicated().sum())
 
-st.subheader("Numerical summary")
+    st.subheader("Numerical summary")
 
-summary_columns = [
-    "original_publication_year",
-    "average_rating",
-    "ratings_count",
-]
+    summary_columns = [
+        "original_publication_year",
+        "average_rating",
+        "ratings_count",
+    ]
 
-st.dataframe(books[summary_columns].describe())
+    st.dataframe(books[summary_columns].describe())
 
-st.subheader("Oldest books")
+    st.subheader("Oldest books")
 
-year_columns = ["title", "authors", "original_publication_year"]
+    year_columns = ["title", "authors", "original_publication_year"]
 
-st.dataframe(
-    books.sort_values("original_publication_year")[year_columns].head(10)
-)
+    st.dataframe(
+        books.sort_values("original_publication_year")[year_columns].head(10)
+    )
 
-st.subheader("Books with missing publication years")
-missing_year = books["original_publication_year"].isna()
+    st.subheader("Books with missing publication years")
+    missing_year = books["original_publication_year"].isna()
 
-st.dataframe(books.loc[missing_year, year_columns])
+    st.dataframe(books.loc[missing_year, year_columns])
