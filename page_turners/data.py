@@ -1,4 +1,4 @@
-"""Functions for loading the book dataset."""
+"""Functions for loading and cleaning the book dataset."""
 
 import pandas as pd
 
@@ -22,7 +22,7 @@ def load_books(csv_path="books.csv"):
 
 def clean_books(books):
     """
-    Prepare books for the ratings analysis.
+    Remove books with missing ratings or nonpositive rating counts.
 
     Parameters
     ----------
